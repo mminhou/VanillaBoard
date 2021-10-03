@@ -1,38 +1,55 @@
-export default function Food({$app, initialState, onClick, addFavorite, io}) {
+export default function Food({$app, initialState, onClick, addFavorite, io, createTemplate}) {
     this.state = initialState
     this.onClick = onClick
     this.addFavorite = addFavorite
     this.io = io
+    this.createTemplate = createTemplate
     this.$target = document.createElement('div')
     this.$target.className = 'page-container'
     $app.appendChild(this.$target)
+    let count = 12
 
-    this.render = () => {
-        const cardTemplate = this.state.map((food) => {
-            return `
+    let cardTemplate = this.state.slice(0, 12).map((food) => {
+        return `
                 <div class="card-container">
                     <div class="card-action" data-url="${food.url}">
                         <img data-src="${food.imageUrl}" class="card-image"/>
-                        <h5 class="card-title">${food.title}</h5>
+                        <h4 class="card-title">${food.title}</h4>
                         <span class="card-content"">${food.summaryContent}</span>
                     </div>
                     <span class="card-medium">By ${food.mediaName}</span>
                     <span class="favorite" data-id="${food.idx}" >
                     ★</span>
                 </div>`
-        }).join('')
+    }).join('')
 
 
+    this.render = () => {
         this.$target.innerHTML = `
             <h1>푸드</h1>
             ${cardTemplate}
         `
 
         const images = document.querySelectorAll('.card-image');
-        images.forEach((image) => {this.io.observe(image);})
+        images.forEach((image) => {
+            this.io.observe(image);
+        })
+
+        const cards = document.querySelector('.page-container .card-container:last-child')
+        const is = new IntersectionObserver((entry, observer) => {
+            const ioTarget = entry[0].target
+            if (entry[0].isIntersecting) {
+                is.unobserve(ioTarget);
+                cardTemplate += this.createTemplate(this.state[count++])
+                this.render()
+            }
+        }, {
+            threshold: 1
+        });
+        is.observe(cards)
     }
 
-    this.$target.addEventListener('click', (e)=>{
+    this.$target.addEventListener('click', (e) => {
         const $card = e.target.closest('.card-action')
         if ($card) {
             const cardUrl = $card.dataset.url

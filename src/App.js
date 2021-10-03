@@ -65,7 +65,8 @@ export default function App($app) {
             initialState: this.curState,
             onClick: this.onClick,
             addFavorite: this.addFavorite,
-            io : this.io,
+            io: this.io,
+            createTemplate: this.createTemplate
         });
     };
 
@@ -137,21 +138,19 @@ export default function App($app) {
         })
     }, {threshold: 1})
 
-    this.render = () => {
-        this.routes = routes;
-        const path = sessionStorage.getItem('recentPath')
-        const recentState = sessionStorage.getItem('recentState')
-        const route = this.routes.find((route) => route.path === path);
-        const View = route.view;
-        new View({
-            $app,
-            initialState: JSON.parse(recentState),
-            onClick: this.onClick,
-            addFavorite: this.addFavorite,
-            io: this.io,
-        })
+    this.createTemplate = (item) => {
+        return `
+            <div class="card-container">
+                <div class="card-action" data-url="${item.url}">
+                    <img data-src="${item.imageUrl}" class="card-image"/>
+                    <h5 class="card-title">${item.title}</h5>
+                    <span class="card-content"">${item.summaryContent}</span>
+                </div>
+                <span class="card-medium">By ${item.mediaName}</span>
+                <span class="favorite" data-id="${item.idx}" >★</span>
+            </div>
+        `
     }
-    this.render()
 
     const init = async () => {
         try {
@@ -182,6 +181,23 @@ export default function App($app) {
         }
     }
     init()
+
+    this.render = () => {
+        this.routes = routes;
+        const path = sessionStorage.getItem('recentPath')
+        const recentState = sessionStorage.getItem('recentState')
+        const route = this.routes.find((route) => route.path === path);
+        const View = route.view;
+        new View({
+            $app,
+            initialState: JSON.parse(recentState),
+            onClick: this.onClick,
+            addFavorite: this.addFavorite,
+            io: this.io,
+            createTemplate: this.createTemplate
+        })
+    }
+    this.render()
 
 
 }
