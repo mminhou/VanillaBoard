@@ -116,6 +116,44 @@ a:active {
     width: 80%;
     margin: 50px auto;
 }
+.detail-card-container .inven-btn {
+    background-color: rgb(94, 110, 199);
+    border: none;
+    padding: 20px 30px;
+    color: white;
+    border-radius: 10px;
+}
+.detail-card-container .category {
+    font-size: 18px;
+}
+.detail-card-container .title {
+    margin: 0 0 20px 0;
+    font-family: "Nanum Myeongjo", "맑은 고딕", "Malgun Gothic", sans-serif;
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 60px;
+    word-break: break-all;
+}
+.detail-card-container .medium {
+    font-size: 14px;
+    color: #b2b2b2;
+}
+.detail-card-container .date {
+    font-size: 16px;
+    float: right;
+    color: #b2b2b2;
+}
+.detail-card-container .image-container {
+    text-align: center;
+    margin: 50px 0;
+}
+.detail-card-container .image-container .detail-image {
+    padding: 10px;
+}
+.detail-card-container .detail-text {
+    font-size: 15px;
+    line-height: 29px;
+}
 .favorite-card-container {
     width: 80%;
     text-align: center;

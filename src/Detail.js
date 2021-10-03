@@ -1,28 +1,42 @@
-export default function Detail({$app, initialState, addFavorite}) {
+export default function Detail({$app, initialState, addFavorite, io}) {
     this.state = initialState
     this.addFavorite = addFavorite
+    this.io = io
     this.$target = document.createElement('div')
     this.$target.className = 'detail-card-container'
     $app.appendChild(this.$target)
 
     this.render = () => {
+        const imageContent = this.state.image.map((i) => {
+            if (i.startsWith('http')) {
+                return `<img data-src="${i}" width="80%" class="detail-image"/>`
+            }
+        }).join('')
+
+        const textContent = this.state.content.map((t) =>
+            `<p class="detail-text">${t}</p>`
+        ).join('')
+
         const detailTemplate = `
-            <span>${this.state.category}</span>
-            <h1>${this.state.title}</h1>
-            <p>${this.state.medium}</p>
-            <img src="${this.state.image}"/>
-            <p>${this.state.content}</p>
-            
-            <nav class="nav">
-            <a href="#" class="nav-item">홈</a>
-            <a href="#life" class="nav-item">라이프</a>
-            <a href="#food" class="nav-item">푸드</a>
-            <a href="#travel" class="nav-item">여행</a>
-            <a href="#culture" class="nav-item">컬처</a>
-            <a href="#favorite" class="nav-item">즐겨찾기</a>
-        </nav>
+            <p class="category">${this.state.category}</p>
+            <p class="title">${this.state.title}</p>
+            <span class="pre">by </span><span class="medium"> ${this.state.mediaName.slice(2)}</span>
+            <span class="date"> ${this.state.date}</span>
+            <div class="image-container">
+                ${imageContent}
+            </div>
+            ${textContent}                        
+            <button class="inven-btn" onclick="history.back()" >
+                목록
+            </button>
         `
         this.$target.innerHTML = `<div>${detailTemplate}</div>`
+
+        const images = document.querySelectorAll('.detail-image');
+        images.forEach((image) => {
+            this.io.observe(image);
+        })
     }
     this.render()
+
 }
