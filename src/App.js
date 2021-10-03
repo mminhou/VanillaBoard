@@ -12,13 +12,13 @@ const cache = {}
 
 export default function App($app) {
     this.state = {
-        isLoading: true,
+        isLoading: false,
         rankContent: [],
         lifeContent: [],
         foodContent: [],
         travelContent: [],
         cultureContent: [],
-        selectedCardImage: [],
+        selectedCardContent: [],
     }
 
     const routes = [
@@ -37,70 +37,76 @@ export default function App($app) {
         const route = this.routes.find((route) => route.path === this.cur);
         const View = route.view;
         $app.innerHTML = ''
-        localStorage.setItem('locationPath', View)
+        sessionStorage.setItem('recentPath', this.cur)
         if (View === Home) {
-            new View({
-                $app, initialState: {
-                    rank: this.state.rankContent,
-                    life: this.state.lifeContent.slice(0, 3),
-                    food: this.state.foodContent.slice(0, 3),
-                    travel: this.state.travelContent.slice(0, 3),
-                    culture: this.state.cultureContent.slice(0, 3),
-                },
-                onClick: this.onClick
-            });
+            this.curState = {
+                rank: this.state.rankContent,
+                life: this.state.lifeContent.slice(0, 3),
+                food: this.state.foodContent.slice(0, 3),
+                travel: this.state.travelContent.slice(0, 3),
+                culture: this.state.cultureContent.slice(0, 3),
+            }
         } else if (View === Life) {
-            new View({$app, initialState: this.state.lifeContent, onClick: this.onClick});
+            this.curState = this.state.lifeContent
         } else if (View === Food) {
-            new View({$app, initialState: this.state.foodContent, onClick: this.onClick});
+            this.curState = this.state.foodContent
         } else if (View === Travel) {
-            new View({$app, initialState: this.state.travelContent, onClick: this.onClick});
+            this.curState = this.state.travelContent
         } else if (View === Culture) {
-            new View({$app, initialState: this.state.cultureContent, onClick: this.onClick, addFavorite: this.addFavorite});
+            this.curState = this.state.cultureContent
         } else if (View === Detail) {
-            new View({$app, initialState: this.state.selectedCardImage})
+            this.curState = this.state.selectedCardContent
         } else if (View === Favorite) {
-            new View({$app, onClick: this.onClick})
+            this.curState = JSON.parse(localStorage.getItem('favorite'))
         }
+        sessionStorage.setItem('recentState', JSON.stringify(this.curState))
+        new View({
+            $app,
+            initialState: this.curState,
+            onClick: this.onClick,
+            addFavorite: this.addFavorite,
+            io : this.io,
+        });
     };
 
-    // window.addEventListener('beforeunload', (event) => {
-    //     event.preventDefault();
-    //     console.log('#'+localStorage.getItem('locationPath'))
-    //     const path = localStorage.getItem('locationPath')
-    //     location.replace = '#'+path
-    // });
-
+    const loading = new Loading({$app, initialState: this.state.isLoading})
 
     this.setState = (nextState) => {
         this.state = nextState
         loading.setState(this.state.isLoading)
     }
 
-    const loading = new Loading({$app, initialState: this.state.isLoading})
-
     this.onClick = async (cardUrl) => {
         cardUrl = cardUrl.replace('https://hub.zum.com/', '').split('/')
         if (cache[cardUrl]) {
             this.setState({
                 ...this.state,
-                selectedCardImage: cache[cardUrl]
+                selectedCardContent: cache[cardUrl]
             })
         } else {
-            this.setState({
-                ...this.state,
-                isLoading: true,
-            })
-            const scrap = await scrapRequest(cardUrl[0], cardUrl[1])
-            this.setState({
-                ...this.state,
-                selectedCardImage: scrap
-            })
-            cache[cardUrl] = scrap
-            this.setState({
-                ...this.state,
-                isLoading: false,
-            })
+            try {
+                this.setState({
+                    ...this.state,
+                    isLoading: true,
+                })
+                const scrap = await scrapRequest(cardUrl[0], cardUrl[1])
+                this.setState({
+                    ...this.state,
+                    selectedCardContent: scrap
+                })
+                cache[cardUrl] = scrap
+                this.setState({
+                    ...this.state,
+                    isLoading: false,
+                })
+            } catch (e) {
+                throw new Error(e.message)
+            } finally {
+                this.setState({
+                    ...this.state,
+                    isLoading: false
+                })
+            }
         }
         location.href = '#detail'
     }
@@ -110,7 +116,7 @@ export default function App($app) {
         if (favorite) {
             const favoriteInLocal = favorite.find(e => e.idx === card.idx)
             if (favoriteInLocal) {
-                alert("이미 즐겨찾기 목록에 추가되어 있습니다. ")
+                alert("이미 즐겨찾기 목록에 존재합니다.")
                 return
             } else {
                 favorite.unshift(card)
@@ -119,8 +125,33 @@ export default function App($app) {
             favorite = [card]
         }
         localStorage.setItem('favorite', JSON.stringify(favorite))
-        alert("successful add favorite")
+        alert("즐겨찾기 목록에 추가되었습니다.")
     }
+
+    this.io = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.src = entry.target.dataset.src;
+                observer.unobserve(entry.target);
+            }
+        })
+    }, {threshold: 1})
+
+    this.render = () => {
+        this.routes = routes;
+        const path = sessionStorage.getItem('recentPath')
+        const recentState = sessionStorage.getItem('recentState')
+        const route = this.routes.find((route) => route.path === path);
+        const View = route.view;
+        new View({
+            $app,
+            initialState: JSON.parse(recentState),
+            onClick: this.onClick,
+            addFavorite: this.addFavorite,
+            io: this.io,
+        })
+    }
+    this.render()
 
     const init = async () => {
         try {
@@ -142,7 +173,7 @@ export default function App($app) {
                 rankContent: Rank,
             })
         } catch (e) {
-            // error handling
+            throw new Error(e.message)
         } finally {
             this.setState({
                 ...this.state,
@@ -150,6 +181,7 @@ export default function App($app) {
             })
         }
     }
-
     init()
+
+
 }

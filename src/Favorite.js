@@ -1,6 +1,7 @@
-export default function Favorite({$app, onClick}) {
+export default function Favorite({$app, initialState, onClick, io}) {
+    this.state = initialState
     this.onClick = onClick
-    this.state = JSON.parse(localStorage.getItem('favorite'))
+    this.io = io
     this.$target = document.createElement('div')
     this.$target.className = 'favorite-card-container'
     $app.appendChild(this.$target)
@@ -10,7 +11,7 @@ export default function Favorite({$app, onClick}) {
             return `
                 <div class="favorite-card" data-url="${favorite.url}">
                     <div class="favorite-card-image">
-                        <img src="${favorite.imageUrl}" width="100%"/> 
+                        <img data-src="${favorite.imageUrl}" width="100%" class="card-image"/> 
                     </div>
                     <div class="favorite-card-content">
                         <h4 class=""">${favorite.title}</h5>
@@ -24,6 +25,9 @@ export default function Favorite({$app, onClick}) {
             <h1>즐겨찾기</h1>
             ${cardTemplate}
         `
+
+        const images = document.querySelectorAll('.card-image');
+        images.forEach((image) => {this.io.observe(image);})
     }
 
     this.$target.addEventListener('click', (e)=>{
