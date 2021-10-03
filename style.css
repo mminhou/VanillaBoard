@@ -31,15 +31,24 @@ a:active {
     width: 20%;
     float: left;
 }
-.card-container {
+.page-container {
     width: 80%;
     text-align: center;
     margin: auto;
 }
-.card:hover {
+.card-container {
+    display: inline-block;
+    width: 20%;
+    margin-bottom: 10px;
+}
+.card-action {
+    padding: 8px;
+    margin-bottom: 5px;
+}
+.card-action:hover {
     background-color: rgb(243, 245, 247);
 }
-.card .card-title {
+.card-action .card-title {
     margin: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -49,14 +58,7 @@ a:active {
     word-wrap: break-word;
     line-height: 16px;
 }
-
-.card {
-    width: 18%;
-    display: inline-block;
-    padding: 10px;
-}
-
-.card .card-content {
+.card-action .card-content {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -66,17 +68,17 @@ a:active {
     font-size: 12px;
     line-height: 16px;
     height: 16px;
-    width: 95%;
+    width: 100%;
     margin: auto;
 }
 
-.card .card-medium {
+.card-container .card-medium {
     float: left;
-    font-size: 10px;
-    margin: 5px;
+    font-size: 12px;
+    padding-left: 10px;
 }
 
-.card .card-image {
+.card-action .card-image {
     width: 100%;
 }
 
@@ -85,7 +87,9 @@ a:active {
     margin: 50px auto;
 }
 
-.favorite {
+.card-container .favorite {
+    float: right;
+    padding-right: 10px;
     border: none;
     background-color: white;
 }
@@ -117,4 +121,21 @@ a:active {
     width: 60%;
     float: right
 
+}
+
+.loading {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.loading > div {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
