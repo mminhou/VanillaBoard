@@ -10,9 +10,12 @@ export default function Home({$app, initialState, onClick, addFavorite, io}) {
     this.render = () => {
         const rankTemplate = this.state.rank.map((rank, index) => {
             return `
-                <div class="rank">
-                    <p>${index + 1} ${rank.title}</p>   
+                <div class="rank card-action" data-url="${rank.url}">
+                    <p class="rank-number" style="font-style: oblique; padding-top: 10px; margin: 0; color: rgb(157, 157, 157); font-size: 20px;">${index + 1}</p>
+                    <p class="rank-title" style="display: inline-block">${rank.title}</p>
                     <br/>
+                    <span class="pre">by </span>   
+                    <span class="rank-medium"> ${rank.mediaName}</span>
                 </div>
             `
         }).join('')
@@ -22,10 +25,11 @@ export default function Home({$app, initialState, onClick, addFavorite, io}) {
                 <div class="card-container">
                     <div class="card-action" data-url="${life.url}">
                         <img data-src="${life.imageUrl}" class="card-image"/>
-                        <h5 class="card-title">${life.title}</h5>
+                        <h4 class="card-title">${life.title}</h4>
                         <span class="card-content"">${life.summaryContent}</span>
                     </div>
-                    <span class="card-medium">By ${life.mediaName}</span>
+                    <span class="pre">by</span>
+                    <span class="card-medium">${life.mediaName}</span>
                     <span class="favorite" data-id="${life.idx}" data-category="life">
                     ★</span>
                 </div>`
@@ -36,10 +40,11 @@ export default function Home({$app, initialState, onClick, addFavorite, io}) {
                 <div class="card-container">
                     <div class="card-action" data-url="${food.url}">
                         <img data-src="${food.imageUrl}" class="card-image"/>
-                        <h5 class="card-title">${food.title}</h5>
+                        <h4 class="card-title">${food.title}</h4>
                         <span class="card-content"">${food.summaryContent}</span>
                     </div>
-                    <span class="card-medium">By ${food.mediaName}</span>
+                    <span class="pre">by</span>
+                    <span class="card-medium">${food.mediaName}</span>
                     <span class="favorite" data-id="${food.idx}" data-category="food">
                     ★</span>
                 </div>`
@@ -50,10 +55,11 @@ export default function Home({$app, initialState, onClick, addFavorite, io}) {
                 <div class="card-container">
                     <div class="card-action" data-url="${travel.url}">
                         <img data-src="${travel.imageUrl}" class="card-image"/>
-                        <h5 class="card-title">${travel.title}</h5>
+                        <h4 class="card-title">${travel.title}</h4>
                         <span class="card-content"">${travel.summaryContent}</span>
                     </div>
-                    <span class="card-medium">By ${travel.mediaName}</span>
+                    <span class="pre">by</span>
+                    <span class="card-medium">${travel.mediaName}</span>
                     <span class="favorite" data-id="${travel.idx}" data-category="travel">
                     ★</span>
                 </div>`
@@ -64,10 +70,11 @@ export default function Home({$app, initialState, onClick, addFavorite, io}) {
                 <div class="card-container">
                     <div class="card-action" data-url="${culture.url}">
                         <img data-src="${culture.imageUrl}" class="card-image"/>
-                        <h5 class="card-title">${culture.title}</h5>
+                        <h4 class="card-title">${culture.title}</h4>
                         <span class="card-content"">${culture.summaryContent}</span>
                     </div>
-                    <span class="card-medium">By ${culture.mediaName}</span>
+                    <span class="pre">by</span>
+                    <span class="card-medium">${culture.mediaName}</span>
                     <span class="favorite" data-id="${culture.idx}" data-category="culture">
                     ★</span>
                 </div>`

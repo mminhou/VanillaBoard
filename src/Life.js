@@ -17,7 +17,8 @@ export default function Life({$app, initialState, onClick, addFavorite, io, crea
                         <h4 class="card-title">${life.title}</h4>
                         <span class="card-content"">${life.summaryContent}</span>
                     </div>
-                    <span class="card-medium">By ${life.mediaName}</span>
+                    <span class="pre">by</span>
+                    <span class="card-medium">${life.mediaName}</span>
                     <span class="favorite" data-id="${life.idx}" >
                     ★</span>
                 </div>`

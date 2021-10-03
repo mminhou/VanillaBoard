@@ -17,7 +17,8 @@ export default function Culture({$app, initialState, onClick, addFavorite, io, c
                         <h4 class="card-title">${culture.title}</h4>
                         <span class="card-content"">${culture.summaryContent}   </span>
                     </div>
-                    <span class="card-medium">By ${culture.mediaName} </span>
+                    <span class="pre">by</span>
+                    <span class="card-medium">${culture.mediaName} </span>
                     <span class="favorite" data-id="${culture.idx}">
                     ★</span>
                 </div>`

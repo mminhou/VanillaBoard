@@ -12,7 +12,7 @@ a:active {
 
 .nav {
     height: 62px;
-    padding: 16px;
+    padding: 0px;
     border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
@@ -28,11 +28,32 @@ a:active {
     margin: auto;
 }
 .home-container .rank-container {
-    width: 20%;
+    width: 30%;
     float: left;
 }
+.home-container .rank-container .rank {
+    text-align: left;
+    background-color: rgb(245, 245, 245);
+    margin: 10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+.home-container .rank-container .rank:hover {
+    background-color: rgb(99, 130, 165);
+    color: whitesmoke;
+}
+.home-container .rank-container .rank .rank-title {
+    margin: 8px 8px 8px 0px;
+    font-size: 15px;
+    line-height: 20px;
+}
+.home-container .rank-container .rank .rank-medium {
+    font-size: 12px;
+    color: rgb(142, 142, 142);
+}
+
 .page-container {
-    width: 80%;
+    width: 100%;
     text-align: center;
     margin: auto;
 }
@@ -40,53 +61,48 @@ a:active {
     display: inline-block;
     width: 20%;
     margin-bottom: 10px;
+    height: 320px;
 }
-.card-action {
-    padding: 8px;
+.card-container .card-action {
+    padding: 10px;
     margin-bottom: 5px;
 }
-.card-action:hover {
+.card-container .card-action:hover {
     background-color: rgb(243, 245, 247);
 }
-.card-action .card-title {
-    margin: 5px;
+.card-container .card-action .card-title {
+    margin: 15px 0;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     word-wrap: break-word;
-    line-height: 16px;
+    color: rgb(68, 68, 68);
+    text-align: left;
+    line-height: 23px;
 }
-.card-action .card-content {
+.card-container .card-action .card-content {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     word-wrap: break-word;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 15px;
     height: 16px;
     width: 100%;
     margin: auto;
+    color: rgb(156, 156, 156)
 }
-
 .card-container .card-medium {
-    float: left;
     font-size: 12px;
     padding-left: 10px;
+    color: rgb(142, 142, 142);
 }
-
-.card-action .card-image {
+.card-container .card-action .card-image {
     width: 100%;
 }
-
-.detail-card-container {
-    width: 80%;
-    margin: 50px auto;
-}
-
 .card-container .favorite {
     float: right;
     padding-right: 10px;
@@ -96,33 +112,54 @@ a:active {
 .favorite:hover {
     color: red
 }
+.detail-card-container {
+    width: 80%;
+    margin: 50px auto;
+}
 .favorite-card-container {
-    width: 70%;
+    width: 80%;
     text-align: center;
     margin: auto;
 }
-.favorite-card {
+.favorite-card-container .favorite-card {
     width: 100%;
+    display: flex;
     text-align: justify;
-    display: inline-block;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+    align-items: center;
+    padding: 20px 0;
+    border-top: 1px solid #ccc;
+    height: 200px;
 }
-.favorite-card:hover {
+.favorite-card-container .favorite-card:hover {
     background-color: rgb(243, 245, 247);
 }
-.favorite-card .favorite-card-image {
-    display: inline-block !important;
-    width: 30%;
-    float: left
-}
-.favorite-card .favorite-card-content {
+.favorite-card-container .favorite-card .favorite-card-image {
     display: inline-block;
-    width: 60%;
-    float: right
-
+    width: 28%;
 }
-
+.favorite-card-container .favorite-card .favorite-card-title {
+    display: inline-block;
+    width: 20%;
+    float: left;
+    margin-right: 5%;
+    margin-left: 3%;
+    color: rgb(68, 68, 68);
+    font-size: 17px;
+    line-height: 26px;
+}
+.favorite-card-container .favorite-card .favorite-card-content {
+    display: inline-block;
+    width: 40%;
+    float: left;
+    margin-right: 7%;
+    color: rgb(157, 157, 157);
+    font-size: 14px;
+    line-height: 25px;
+}
+.favorite-card-container .favorite-card .favorite-card-medium {
+    font-size: 13px;
+    color: rgb(142, 142, 142);
+}
 .loading {
   z-index: 1;
   width: 100%;
@@ -138,4 +175,11 @@ a:active {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+.pre {
+    color: #b2b2b2;
+    font-size: 14px;
+    font-family: 'Nanum Myeongjo','맑은 고딕','Malgun Gothic',sans-serif;
+    font-style: italic;
+    font-weight: 800;
 }

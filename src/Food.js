@@ -17,7 +17,8 @@ export default function Food({$app, initialState, onClick, addFavorite, io, crea
                         <h4 class="card-title">${food.title}</h4>
                         <span class="card-content"">${food.summaryContent}</span>
                     </div>
-                    <span class="card-medium">By ${food.mediaName}</span>
+                    <span class="pre">by</span>
+                    <span class="card-medium">${food.mediaName}</span>
                     <span class="favorite" data-id="${food.idx}" >
                     ★</span>
                 </div>`

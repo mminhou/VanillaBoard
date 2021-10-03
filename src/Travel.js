@@ -17,7 +17,8 @@ export default function Travel({$app, initialState, onClick, addFavorite, io, cr
                         <h4 class="card-title">${travel.title}</h4>
                         <span class="card-content"">${travel.summaryContent}</span>
                     </div>
-                    <span class="card-medium">By ${travel.mediaName}</span>
+                    <span class="pre">by</span>
+                    <span class="card-medium">${travel.mediaName}</span>
                     <span class="favorite" data-id="${travel.idx}" >
                     ★</span>
                 </div>`

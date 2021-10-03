@@ -7,19 +7,21 @@ export default function Favorite({$app, initialState, onClick, io}) {
     $app.appendChild(this.$target)
 
     this.render = () => {
-        const cardTemplate = this.state.map((favorite) => {
+        const cardTemplate = this.state ? this.state.map((favorite) => {
             return `
                 <div class="favorite-card" data-url="${favorite.url}">
-                    <div class="favorite-card-image">
-                        <img data-src="${favorite.imageUrl}" width="100%" class="card-image"/> 
+                    <div class="favorite-card-title">
+                        <h4 class=""">${favorite.title}</h5>
+                        <span class="pre">by </span><span class="favorite-card-medium"> ${favorite.mediaName} </span>
                     </div>
                     <div class="favorite-card-content">
-                        <h4 class=""">${favorite.title}</h5>
-                        <p> ${favorite.summaryContent} </p>
-                        <span class="">${favorite.mediaName} </span>
+                        <p>${favorite.summaryContent}</p>
+                    </div>
+                    <div class="favorite-card-image">
+                        <img data-src="${favorite.imageUrl}" height="100%" class="card-image"/> 
                     </div>
                 </div>`
-        }).join('')
+        }).join('') : `<p>즐겨찾기 목록이 존재하지 않습니다.</p>`
 
         this.$target.innerHTML = `
             <h1>즐겨찾기</h1>
