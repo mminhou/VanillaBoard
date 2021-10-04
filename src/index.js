@@ -1,3 +1,3 @@
-import '../style.css';
+import '../main.scss';
 import App from './App.js';
 new App(document.querySelector('.app'))

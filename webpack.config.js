@@ -17,15 +17,15 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                test: /\.(sa|sc|c)ss$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
         ],
     },
     plugins: [
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: './style.css',
+            filename: './main.css',
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './index.html'),
