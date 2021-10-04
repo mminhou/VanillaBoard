@@ -81,17 +81,21 @@ export default function Home({$app, initialState, onClick, addFavorite, io}) {
             <div class="rank-container">
                 ${rankTemplate}
             </div>
-            <div className="card-conatiner">
+            <div class="card-conatiner">
+                <h3 class="tag-title">#라이프</h3>
                 ${lifeCardTemplate}
             </div>
-            <div className="card-conatiner">
+            <div class="card-conatiner">
+                <h3 class="tag-title">#푸드</h3>
                 ${foodCardTemplate}
             </div>
             </div>
-            <div className="card-conatiner">
+            <div class="card-conatiner">
+                <h3 class="tag-title">#여행</h3>
                 ${travelCardTemplate}
             </div>
-            <div className="card-conatiner">
+            <div class="card-conatiner">
+                <h3 class="tag-title">#문화</h3>
                 ${cultureCardTemplate}
             </div>
         `

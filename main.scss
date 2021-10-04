@@ -4,8 +4,12 @@ a {
 		color: black;
 	}
 	&:active {
-		color: blue;
+		color: orangered;
 	}
+}
+.screen {
+	margin-top: 200px;
+	text-align: center;
 }
 .nav {
 	height: 62px;
@@ -22,6 +26,15 @@ a {
 	width: 90%;
 	text-align: center;
 	margin: auto;
+	.tag-title {
+		text-align: left;
+		margin: 0 0 0 36%;
+		color: rgb(73, 126, 177);
+		font-size: 19px;
+		font-family: "Nanum Myeongjo", "맑은 고딕", "Malgun Gothic", sans-serif;
+		font-weight: 700;
+		line-height: 48px;
+	}
 	.rank-container {
 		width: 30%;
 		float: left;

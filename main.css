@@ -6,7 +6,12 @@ a:visited {
   color: black;
 }
 a:active {
-  color: blue;
+  color: orangered;
+}
+
+.screen {
+  margin-top: 200px;
+  text-align: center;
 }
 
 .nav {
@@ -25,6 +30,15 @@ a:active {
   width: 90%;
   text-align: center;
   margin: auto;
+}
+.home-container .tag-title {
+  text-align: left;
+  margin: 0 0 0 36%;
+  color: #497eb1;
+  font-size: 19px;
+  font-family: "Nanum Myeongjo", "맑은 고딕", "Malgun Gothic", sans-serif;
+  font-weight: 700;
+  line-height: 48px;
 }
 .home-container .rank-container {
   width: 30%;
