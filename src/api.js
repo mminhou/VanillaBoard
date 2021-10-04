@@ -87,7 +87,10 @@ export const cultureRequest = async () => {
 
 export const scrapRequest = async (category, id) => {
     try {
+        const timeoutId = setTimeout(() => controller.abort(), 5000)
         const res = await fetch(`${DETAIL_API_END_POINT}/${category}/${id}`)
+        clearTimeout(timeoutId)
+
         if (!res.ok) {
             throw new Error("Server state Err")
         }
