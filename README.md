@@ -41,6 +41,9 @@ $ npm start
 
 ### Screen
 ![main](./src/factory/images/home.png)
+
 ![travel](./src/factory/images/travel.png)
+
 ![detail](./src/factory/images/detail.png)
+
 ![favorite](./src/factory/images/favorite.png)
