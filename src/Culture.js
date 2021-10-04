@@ -19,8 +19,8 @@ export default function Culture({$app, initialState, onClick, addFavorite, io, c
                     </div>
                     <span class="pre">by</span>
                     <span class="card-medium">${culture.mediaName} </span>
-                    <span class="favorite" data-id="${culture.idx}">
-                    ★</span>
+                    <div class="favorite" data-id="${culture.idx}">
+                    </div>
                 </div>`
     }).join('')
 

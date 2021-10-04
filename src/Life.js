@@ -19,8 +19,7 @@ export default function Life({$app, initialState, onClick, addFavorite, io, crea
                     </div>
                     <span class="pre">by</span>
                     <span class="card-medium">${life.mediaName}</span>
-                    <span class="favorite" data-id="${life.idx}" >
-                    ★</span>
+                    <span class="favorite" data-id="${life.idx}"></span>
                 </div>`
     }).join('')
 

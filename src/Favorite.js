@@ -18,7 +18,7 @@ export default function Favorite({$app, initialState, onClick, io}) {
                         <p>${favorite.summaryContent}</p>
                     </div>
                     <div class="favorite-card-image">
-                        <img data-src="${favorite.imageUrl}" height="100%" class="card-image"/> 
+                        <img data-src="${favorite.imageUrl}" width="280px" height="200px" class="card-image"/> 
                     </div>
                 </div>`
         }).join('') : `<p>즐겨찾기 목록이 존재하지 않습니다.</p>`

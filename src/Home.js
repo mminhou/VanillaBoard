@@ -30,8 +30,7 @@ export default function Home({$app, initialState, onClick, addFavorite, io}) {
                     </div>
                     <span class="pre">by</span>
                     <span class="card-medium">${life.mediaName}</span>
-                    <span class="favorite" data-id="${life.idx}" data-category="life">
-                    ★</span>
+                    <div class="favorite" data-id="${life.idx}" data-category="life"></div>
                 </div>`
         }).join('')
 
@@ -45,8 +44,7 @@ export default function Home({$app, initialState, onClick, addFavorite, io}) {
                     </div>
                     <span class="pre">by</span>
                     <span class="card-medium">${food.mediaName}</span>
-                    <span class="favorite" data-id="${food.idx}" data-category="food">
-                    ★</span>
+                    <div class="favorite" data-id="${food.idx}" data-category="food"></div>
                 </div>`
         }).join('')
 
@@ -60,8 +58,7 @@ export default function Home({$app, initialState, onClick, addFavorite, io}) {
                     </div>
                     <span class="pre">by</span>
                     <span class="card-medium">${travel.mediaName}</span>
-                    <span class="favorite" data-id="${travel.idx}" data-category="travel">
-                    ★</span>
+                    <div class="favorite" data-id="${travel.idx}" data-category="travel"></div>
                 </div>`
         }).join('')
 
@@ -75,8 +72,7 @@ export default function Home({$app, initialState, onClick, addFavorite, io}) {
                     </div>
                     <span class="pre">by</span>
                     <span class="card-medium">${culture.mediaName}</span>
-                    <span class="favorite" data-id="${culture.idx}" data-category="culture">
-                    ★</span>
+                    <div class="favorite" data-id="${culture.idx}" data-category="culture"></div>
                 </div>`
         }).join('')
 

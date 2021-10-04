@@ -19,8 +19,7 @@ export default function Travel({$app, initialState, onClick, addFavorite, io, cr
                     </div>
                     <span class="pre">by</span>
                     <span class="card-medium">${travel.mediaName}</span>
-                    <span class="favorite" data-id="${travel.idx}" >
-                    ★</span>
+                    <div class="favorite" data-id="${travel.idx}" ></div>
                 </div>`
     }).join('')
 

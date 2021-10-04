@@ -19,8 +19,7 @@ export default function Food({$app, initialState, onClick, addFavorite, io, crea
                     </div>
                     <span class="pre">by</span>
                     <span class="card-medium">${food.mediaName}</span>
-                    <span class="favorite" data-id="${food.idx}" >
-                    ★</span>
+                    <div class="favorite" data-id="${food.idx}"></div>
                 </div>`
     }).join('')
 

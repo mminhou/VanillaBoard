@@ -26,9 +26,8 @@ export default function Detail({$app, initialState, addFavorite, io}) {
                 ${imageContent}
             </div>
             ${textContent}                        
-            <button class="inven-btn" onclick="history.back()" >
-                목록
-            </button>
+            <button class="inven-btn" onclick="history.back()" >목록</button>
+            <div class="favorite"></div>
         `
         this.$target.innerHTML = `<div>${detailTemplate}</div>`
 
@@ -37,6 +36,20 @@ export default function Detail({$app, initialState, addFavorite, io}) {
             this.io.observe(image);
         })
     }
+    this.$target.addEventListener('click', (e) => {
+        if (e.target.closest('.favorite')) {
+            const target = {
+                idx: parseInt(this.state.idx),
+                title: this.state.title,
+                mediaName: this.state.mediaName.slice(2),
+                summaryContent: this.state.content.join(''),
+                imageUrl: this.state.image[0],
+                url: this.state.url,
+            }
+            this.addFavorite(target)
+        }
+    })
+
     this.render()
 
 }
