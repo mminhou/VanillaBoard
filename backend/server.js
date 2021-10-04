@@ -32,9 +32,12 @@ app.get('/detail/:category/:id', async (req, res) => {
     await page.goto(`https://hub.zum.com/${req.params.category}/${req.params.id}`);
 
     let data = {}
+    data.idx = req.params.id
     data.title = await page.$eval('#container > div.contents.d_contents > div.article_header > div > div > h2', (data) => data.textContent);
     data.category = await page.$eval('#container > div.contents.d_contents > div.article_header > div > div > p.top > strong.category', (data) => data.textContent);
-    data.medium = await page.$eval('#container > div.contents.d_contents > div.article_header > div > div > p.writer', (data) => data.textContent);
+    data.mediaName = await page.$eval('#container > div.contents.d_contents > div.article_header > div > div > p.writer', (data) => data.textContent);
+    data.date = await page.$eval('#container > div.contents.d_contents > div.article_wrap > div.article_body > div.article_info > span.date', (data) => data.textContent);
+    data.url = `https://hub.zum.com/${req.params.category}/${req.params.id}`
 
     const subtitleElement = await page.evaluate(() => {
         const element =  document.querySelector('.short_title')
@@ -45,15 +48,14 @@ app.get('/detail/:category/:id', async (req, res) => {
     })
     data.subtitle = subtitleElement
 
-    // const imageElement = await page.evaluate(() => {
-    //     const element = document.querySelector('img[src]')
-    //     if (element) {
-    //         return element.getAttribute('src')
-    //         // return element.map((e) => e.getAttribute('src'))
-    //     }
-    //     return ''
-    // })
-    // data.image = imageElement
+    const imageElement = await page.evaluate(() => {
+        const element = Array.from(document.querySelectorAll('.d_article img'))
+        if (element) {
+            return element.map((e) => e.getAttribute('src'))
+        }
+        return '';
+    })
+    data.image = imageElement
 
     const contentElement = await page.evaluate(() => {
         const element = Array.from(document.querySelectorAll('.d_article p'))
@@ -64,17 +66,9 @@ app.get('/detail/:category/:id', async (req, res) => {
     })
     data.content = contentElement
 
-    /*const number = await page.$$eval('#container > div.contents.d_contents > div.article_wrap > div.article_body > div.article.d_article > table', (data) => data.length);
-    for (let index = 0; index < number; index++) {
-        let temp = await page.$eval('#container > div.contents.d_contents > div.article_wrap > div.article_body > div.article.d_article > table > tbody > tr > td > img[src]', element => {
-            return element.getAttribute('src')});
-        images.push({index, temp})
-    }*/
-
     await browser.close();
 
     return res.json(data)
-
 })
 
 app.listen(3000, () => {
