@@ -127,6 +127,7 @@ export default function App($app) {
         }
         localStorage.setItem('favorite', JSON.stringify(favorite))
         alert("즐겨찾기 목록에 추가되었습니다.")
+        // localStorage.clear()
     }
 
     this.io = new IntersectionObserver((entries, observer) => {
@@ -147,7 +148,7 @@ export default function App($app) {
                     <span class="card-content"">${item.summaryContent}</span>
                 </div>
                 <span class="card-medium">By ${item.mediaName}</span>
-                <span class="favorite" data-id="${item.idx}" >★</span>
+                <div class="favorite" data-id="${item.idx}" ></div>
             </div>
         `
     }
@@ -185,6 +186,18 @@ export default function App($app) {
     this.render = () => {
         this.routes = routes;
         const path = sessionStorage.getItem('recentPath')
+        console.log(path)
+        if (path === null) {
+             $app.innerHTML = `
+                <div class="">
+                    <h1 style="text-align: center">Zum assignment</h1>
+                    <h2>줌 인터넷 과제 테스트 웹 페이지 입니다.</h2>
+                    <h3>위에있는 메뉴를 통해 기능을 보실 수 있습니다!</h3>
+                    <h3>지원자: 최민호</h3>
+                    <h3>평가 감사합니다!</h3>
+                </div>
+            `
+        }
         const recentState = sessionStorage.getItem('recentState')
         const route = this.routes.find((route) => route.path === path);
         const View = route.view;
@@ -198,6 +211,4 @@ export default function App($app) {
         })
     }
     this.render()
-
-
 }

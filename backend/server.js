@@ -26,7 +26,6 @@ app.get('/api/culture', (req, res) => {
     return res.json(cultureJson)
 })
 app.get('/detail/:category/:id', async (req, res) => {
-    console.log(req.params.category, req.params.id)
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(`https://hub.zum.com/${req.params.category}/${req.params.id}`);
