@@ -12,7 +12,6 @@ export default function Loading({$app, initialState}) {
 
     this.render = () => {
         this.$target.innerHTML = `<div><p>Loading ...</p></div>`
-        // this.$target.innerHTML = `<img src={`factory/`}/>`
         this.$target.style.display = this.state ? 'block' : 'none'
     }
 
