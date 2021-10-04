@@ -191,9 +191,9 @@ export default function App($app) {
              $app.innerHTML = `
                 <div class="screen">
                     <h1>Zum assignment</h1>
+                    <h2>지원자 최민호입니다!</h2>
                     <h2>줌 인터넷 과제 테스트 웹 페이지 입니다.</h2>
                     <h3>위에있는 메뉴를 통해 기능을 보실 수 있습니다!</h3>
-                    <h3>지원자 최민호입니다!</h3>
                     <h3>평가 감사합니다!</h3>
                 </div>
             `
