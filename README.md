@@ -40,10 +40,11 @@ $ npm start
 ```
 
 ### Screen
+#### 🌟 Main page
 ![main](./src/factory/images/home.png)
-
+#### 🌟 Life, Food, Travel, Culture page
 ![travel](./src/factory/images/travel.png)
-
+#### 🌟 Detail page
 ![detail](./src/factory/images/detail.png)
-
+#### 🌟 Favorite page
 ![favorite](./src/factory/images/favorite.png)
