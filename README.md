@@ -1,4 +1,4 @@
-# Zum assignment
+# Vanilla Board
 
 ### Back-End
 * Server based on express
